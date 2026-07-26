@@ -33,7 +33,7 @@
 }
 
 .btn:hover {
-  background-color: #000;
+  background-color: #c7b0f0;
 }
 @media (max-width: 430px) {
   .chatInput {

@@ -31,11 +31,22 @@ export default function HomePage() {
   };
 
   const handleSave = () => {
-    if(message.length === 0) return ;
+    if (message.length === 0) return;
 
-    const savedChats = JSON.parse(localStorage.getItem("chatHistory")) || [] ;
-  }
+    const savedChats = JSON.parse(localStorage.getItem("chatHistory")) || [];
 
+    const currentChat = {
+      id: crypto.randomUUID(),
+      createdAt: Date.now(),
+      message,
+    };
+
+    savedChats.push(currentChat);
+
+    localStorage.setItem("chatHistory", JSON.stringify(savedChats));
+
+    alert("Chat Saved");
+  };
 
   return (
     <>
