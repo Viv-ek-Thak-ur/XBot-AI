@@ -1,0 +1,23 @@
+.mobileNavbar{
+    display: flex;
+    padding: 8px 4px;
+    gap: 4px;
+}
+.menuBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    max-width: 40px;
+
+}
+.menuIcon{
+    width: min(32px,100%);
+}
+.navbarHeading{
+
+    color: #9785BA;
+}

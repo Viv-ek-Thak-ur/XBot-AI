@@ -1,0 +1,17 @@
+.suggestionGrid{
+    display: grid;
+    grid-template-rows: 254px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-content: center;
+    gap: 24px;
+    border-radius: 5px;
+    align-items: end;
+   
+}
+@media(max-width:430px){
+    .suggestionGrid{
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+}

@@ -1,0 +1,47 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    font-size: larger;
+    font-weight: 600;
+    min-height: 100%;
+    gap: 16px;
+    align-items: center;
+   
+}
+.head{
+    display: flex;
+    padding: 2px;
+    gap :8px;
+    justify-content: space-around;
+    background-color: #D7C7F4;
+    align-items: center;
+    min-width: 100%;
+}
+head h3{
+    font-weight: 300;
+}
+.icon{
+    height: 34px;
+    width: 34px;
+}
+.chatBtn{
+    background: transparent;
+    border: none;
+   
+}
+.historyBtn{
+     padding: 6px;
+     border: none;
+     background-color: #D7C7F4;
+     border-radius: 5px;
+     font-weight: 700;
+     font-size: 16px;
+}
+.historyBtn:hover{
+    background-color: #9785BA;
+}
+.chatIcon:hover{
+    background-color: #9785BA;
+    border-radius: 3px;
+}
