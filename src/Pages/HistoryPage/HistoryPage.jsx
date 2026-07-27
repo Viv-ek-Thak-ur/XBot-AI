@@ -1,22 +1,20 @@
-import { useState, useEffect } from "react";
-import Hero from "../../Components/Hero/Hero";
-import SuggestionGrid from "../../Components/SuggestionGrid/SuggestionGrid";
-import ChatInput from "../../Components/ChatInput/ChatInput";
+import { useEffect, useState } from "react";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import MobileNavbar from "../../Components/MobileNavbar/MobileNavbar";
+import ChatInput from "../../Components/ChatInput/ChatInput";
 import ChatWindow from "../../Components/ChatWindow/ChatWindow";
+import HistoryCard from "../../Components/HistoryCard/HistoryCard";
 import botData from "../../Data/sampleData.json";
 import styles from "../HomePage/HomePage.module.css";
-import HistoryCard from "../../Components/HistoryCard/HistoryCard";
 
 export default function HistoryPage() {
   const [savedChats, setSavedChats] = useState([]);
+  const [selectedChat, setSelectedChat] = useState(null);
   const [question, setQuestion] = useState("");
   const [message, setMessage] = useState([]);
 
   useEffect(() => {
     const chats = JSON.parse(localStorage.getItem("chatHistory")) || [];
-
     setSavedChats(chats);
   }, []);
 
@@ -25,10 +23,14 @@ export default function HistoryPage() {
   };
 
   const handleAsk = () => {
-    const matchedQue = botData.find((q) => q.question === question);
+    if (question.trim() === "") return;
 
-    setMessage((prev) => [
-      ...prev,
+    const matchedQue = botData.find(
+      (q) => q.question.toLowerCase() === question.toLowerCase()
+    );
+
+    const updatedMessage = [
+      ...message,
       {
         sender: "user",
         text: question,
@@ -39,8 +41,10 @@ export default function HistoryPage() {
           ? matchedQue.response
           : "Sorry I dont know the answer to this question",
       },
-    ]);
+    ];
 
+    setMessage(updatedMessage);
+    setSelectedChat(updatedMessage);
     setQuestion("");
   };
 
@@ -81,14 +85,17 @@ export default function HistoryPage() {
           </header>
 
           <div className={styles.rightContent}>
-            {savedChats.length === 0 ? (
-              <>
-                <Hero />
-                <div>Sorry no saved chats</div>
-              </>
+            {selectedChat ? (
+              <ChatWindow message={selectedChat} />
             ) : (
               savedChats.map((chat) => (
-                <HistoryCard key={chat.id} chat={chat} />
+                <div
+                  key={chat.id}
+                  onClick={() => setSelectedChat(chat.message)}
+                  style={{ cursor: "pointer" }}
+                >
+                  <HistoryCard chat={chat} onClick={() => setSelectedChat(chat.message)} />
+                </div>
               ))
             )}
 

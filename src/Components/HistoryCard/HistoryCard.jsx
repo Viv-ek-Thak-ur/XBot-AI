@@ -1,6 +1,6 @@
 import styles from "./HistoryCard.module.css";
 
-export default function HistoryCard({ chat }) {
+export default function HistoryCard({ chat ,onClick}) {
   const userMessage = chat.message.find(
     (msg) => msg.sender === "user"
   );
