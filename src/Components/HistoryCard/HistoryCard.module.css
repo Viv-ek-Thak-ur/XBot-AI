@@ -1,0 +1,29 @@
+.card {
+  background: #d7c4ff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.message {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  font-size: 40px;
+}
+
+.message h3 {
+  margin: 0;
+}
+
+.message p {
+  margin: 6px 0;
+}
+
+.message span {
+  font-size: 14px;
+  color: gray;
+}

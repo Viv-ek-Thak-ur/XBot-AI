@@ -1,7 +1,10 @@
 import styles from "./Sidebar.module.css";
 import logo from "../../assets/logo.svg";
 import chatIcon from "../../assets/edit.svg";
+import { useNavigate } from "react-router-dom";
+
 export default function Sidebar(){
+    const navigate = useNavigate();
     return(
         <div className={styles.container}>
             <div className={styles.head}>
@@ -12,7 +15,7 @@ export default function Sidebar(){
                 </button>
             </div>
             <div className={styles.history}>
-                <button type="submit" className={styles.historyBtn}>Past Conversation</button>
+                <button type="submit" className={styles.historyBtn} onClick={()=>(navigate("/history"))}>Past Conversation</button>
             </div>
         </div>
     );
