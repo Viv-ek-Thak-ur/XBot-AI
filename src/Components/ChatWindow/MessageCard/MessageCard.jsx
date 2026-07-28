@@ -1,8 +1,10 @@
 import styles from "./MessageCard.module.css";
 import userAvatar from "../../../assets/user.svg";
 import botAvatar from "../../../assets/logo.svg";
+import like from "../../../assets/like.svg";
+import dislike from "../../../assets/dislike.svg";
 
-export default function MessageCard({ message }) {
+export default function MessageCard({ message , onFeedback, index}) {
   const isUser = message.sender === "user";
 
   return (
@@ -24,16 +26,16 @@ export default function MessageCard({ message }) {
         </p>
 
         <div className={styles.footer}>
-          {message.timestamp && (
+          {message.createdAt && (
             <span className={styles.time}>
-              {message.timestamp}
+              {message.createdAt}
             </span>
           )}
 
           {!isUser && (
             <div className={styles.actions}>
-              <button className={styles.actionBtn}>👍</button>
-              <button className={styles.actionBtn}>👎</button>
+              <button className={styles.actionBtn} onClick={()=>onFeedback(index,"like")}><img src={like} alt="like"/></button>
+              <button className={styles.actionBtn} onClick={()=>onFeedback(index,"dislike")}><img src={dislike} alt="dislike"/></button>
             </div>
           )}
         </div>

@@ -8,10 +8,10 @@ export default function Sidebar(){
     return(
         <div className={styles.container}>
             <div className={styles.head}>
-                <img src={logo} alt="Logo" className={styles.icon}/>
+                <img src={logo} alt="Logo" className={styles.icon} onClick={()=>(navigate("/"))}/>
                 <p>New Chat</p>
                 <button type="submit" className={styles.chatBtn}>
-                    <img src={chatIcon} alt="Chat" className={styles.chatIcon}/>
+                    <img src={chatIcon} alt="Chat" className={styles.chatIcon} onClick={()=>(navigate("/"))}/>
                 </button>
             </div>
             <div className={styles.history}>

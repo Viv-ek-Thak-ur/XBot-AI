@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Hero from "../../Components/Hero/Hero";
 import SuggestionGrid from "../../Components/SuggestionGrid/SuggestionGrid";
 import ChatInput from "../../Components/ChatInput/ChatInput";
@@ -6,47 +6,37 @@ import styles from "./HomePage.module.css";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import MobileNavbar from "../../Components/MobileNavbar/MobileNavbar";
 import { useState } from "react";
-import botData from "../../Data/sampleData.json";
 import ChatWindow from "../../Components/ChatWindow/ChatWindow";
+import FeedbackModal from "../../Components/FeedbackModal/FeedbackModal";
+import useChat from "../../Utils/usechat";
+
 
 export default function HomePage() {
-  const [question, setQuestion] = useState("");
-  const [message, setMessage] = useState([]);
+ 
+  const navigate = useNavigate();
+  const {
+  question,
+  message,
+  setMessage,
+  showModal,
+  setShowModal,
+  handleChange,
+  handleAsk,
+  handleFeedback,
+  saveChat,
+} = useChat();
 
-  const handleChange = (e) => {
-    setQuestion(e.target.value);
-  };
-  const handleAsk = () => {
-    const matchedQue = botData.find((q) => q.question === question);
-    setMessage((prev) => [
-      ...prev,
-      { sender: "user", text: question },
-      {
-        sender: "bot",
-        text: matchedQue
-          ? matchedQue.response
-          : "Sorry I dont know the answer to this question",
-      },
-    ]);
-  };
+const handleFeedbackSubmit = ({ rating, feedback }) => {
+  const isSaved = saveChat({ rating, feedback });
 
-  const handleSave = () => {
-    if (message.length === 0) return;
+  if (!isSaved) return;
 
-    const savedChats = JSON.parse(localStorage.getItem("chatHistory")) || [];
+  setShowModal(false);
 
-    const currentChat = {
-      id: crypto.randomUUID(),
-      createdAt: Date.now(),
-      message,
-    };
+  alert("Chat Saved");
 
-    savedChats.push(currentChat);
-
-    localStorage.setItem("chatHistory", JSON.stringify(savedChats));
-
-    alert("Chat Saved");
-  };
+  navigate("/history");
+};
 
   return (
     <>
@@ -71,7 +61,7 @@ export default function HomePage() {
               )}
               {message.length > 0 && (
                 <>
-                  <ChatWindow message={message} />
+                  <ChatWindow message={message} onFeedback={handleFeedback} />
                 </>
               )}
 
@@ -79,12 +69,18 @@ export default function HomePage() {
                 value={question}
                 onChange={handleChange}
                 onAsk={handleAsk}
-                onSave={handleSave}
+                onSave={()=>setShowModal(true)}
               />
             </div>
           </div>
         </div>
       </main>
+      {showModal && (
+  <FeedbackModal
+    onClose={() => setShowModal(false)}
+    onSubmit={handleFeedbackSubmit}
+  />
+)}
     </>
   );
 }
