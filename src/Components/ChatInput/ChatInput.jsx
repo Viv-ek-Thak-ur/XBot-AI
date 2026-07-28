@@ -8,7 +8,7 @@ function ChatInput({ value, onChange, onAsk ,onSave}) {
         value={value}
         onChange={onChange}
         type="text"
-        placeholder="Lets learn React"
+        placeholder='Message Bot AI...'
         className={styles.input}
       />
       <button type="submit" onClick={onAsk} className={styles.btn}>
