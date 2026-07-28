@@ -33,7 +33,7 @@ export default function useChat() {
       sender: "bot",
       text: matchedQue
         ? matchedQue.response
-        : "Sorry I dont know the answer to this question",
+        : "Sorry, Did not understand your query!"  ,
       createdAt: currentTime,
     },
   ]);
