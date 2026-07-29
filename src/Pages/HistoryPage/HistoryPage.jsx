@@ -29,13 +29,13 @@ export default function HistoryPage() {
           </div>
 
           <div className={styles.rightContent}>
-            <header className={styles.rightHeader}>
+            <div className={styles.rightHeader}>
               {selectedChat && (
               <button onClick={() => setSelectedChat(null)} className={styles.backBtn} >
                 Back to History
               </button>
             )}
-            </header>
+            </div>
             {selectedChat ? (
               <ChatWindow message={selectedChat.message} />
             ) : (
