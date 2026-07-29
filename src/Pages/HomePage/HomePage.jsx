@@ -51,7 +51,7 @@ export default function HomePage() {
           </div>
           <div className={styles.right}>
             <header className={styles.rightHeader}>
-              <h1>BotAI</h1>
+              <h1>Bot AI</h1>
             </header>
             <div className={styles.rightContent}>
               {message.length === 0 && (
