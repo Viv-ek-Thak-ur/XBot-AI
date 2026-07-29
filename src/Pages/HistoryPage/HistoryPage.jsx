@@ -4,6 +4,7 @@ import MobileNavbar from "../../Components/MobileNavbar/MobileNavbar";
 import ChatWindow from "../../Components/ChatWindow/ChatWindow";
 import HistoryCard from "../../Components/HistoryCard/HistoryCard";
 import styles from "./HistoryPage.module.css";
+import Hero from "../../Components/Hero/Hero";
 
 export default function HistoryPage() {
   const [savedChats, setSavedChats] = useState([]);

@@ -12,14 +12,14 @@ export default function MessageCard({ message , onFeedback, index}) {
       <div className={styles.avatar}>
         <img
           src={isUser ? userAvatar : botAvatar}
-          alt={isUser ? "User" : "Bot AI"}
+          alt={isUser ? "User" : "Soul AI"}
         />
       </div>
 
       <div className={styles.content}>
-        <h4 className={styles.name}>
-          {isUser ? "You" : "Bot AI"}
-        </h4>
+        <span className={styles.name}>
+          {isUser ? "You" : "Soul AI"}
+        </span>
 
         <p className={styles.text}>
           {message.text}

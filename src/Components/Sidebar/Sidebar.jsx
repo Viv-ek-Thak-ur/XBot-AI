@@ -11,7 +11,10 @@ export default function Sidebar(){
                 <Link to="/">
                 <img src={logo} alt="Logo" className={styles.icon} />
                 </Link>
+                <Link to="/">
                 <p>New Chat</p>
+                </Link>
+               
                 <Link className={styles.chatBtn} to="/">
                 
                     <img src={chatIcon} alt="Chat" className={styles.chatIcon}/>
