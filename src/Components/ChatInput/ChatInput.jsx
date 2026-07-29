@@ -2,7 +2,7 @@ import styles from "./ChatInput.module.css";
 
 function ChatInput({ value, onChange, onAsk ,onSave}) {
   return (
-    <div className={styles.chatInput}>
+    <form className={styles.chatInput}>
       <input
         type="text"
         value={value}
@@ -17,7 +17,7 @@ function ChatInput({ value, onChange, onAsk ,onSave}) {
       <button type="button" className={styles.btn} onClick={onSave}>
         Save
       </button>
-    </div>
+    </form>
   );
 }
 

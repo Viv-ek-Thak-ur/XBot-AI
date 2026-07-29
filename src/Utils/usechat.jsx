@@ -59,9 +59,10 @@ const saveChat = ({ rating, feedback }) => {
 
   const savedChats =
     JSON.parse(localStorage.getItem("chatHistory")) || [];
+  const chatID = crypto.randomUUID();
 
   const currentChat = {
-    id: crypto.randomUUID(),
+    id: chatID,
     createdAt: Date.now(),
     message,
     rating,
@@ -75,11 +76,31 @@ const saveChat = ({ rating, feedback }) => {
     JSON.stringify(savedChats)
   );
 
-  return true;
+  return chatID;
 };
   
 
-  return {
+const updateChat = (chatId, { rating, feedback }) => {
+  const chats =
+    JSON.parse(localStorage.getItem("chatHistory")) || [];
+
+  const updatedChats = chats.map((chat) =>
+    chat.id === chatId
+      ? {
+          ...chat,
+          rating,
+          feedback,
+        }
+      : chat
+  );
+
+  localStorage.setItem(
+    "chatHistory",
+    JSON.stringify(updatedChats)
+  );
+};
+
+return {
   question,
   message,
   setMessage,
@@ -88,6 +109,7 @@ const saveChat = ({ rating, feedback }) => {
   handleChange,
   handleAsk,
   handleFeedback,
-  saveChat
+  saveChat,
+  updateChat,
 };
 }

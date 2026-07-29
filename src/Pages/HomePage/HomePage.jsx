@@ -10,33 +10,34 @@ import ChatWindow from "../../Components/ChatWindow/ChatWindow";
 import FeedbackModal from "../../Components/FeedbackModal/FeedbackModal";
 import useChat from "../../Utils/usechat";
 
-
 export default function HomePage() {
- 
   const navigate = useNavigate();
+  const [savedChatId, setSavedChatId] = useState(null);
   const {
-  question,
-  message,
-  setMessage,
-  showModal,
-  setShowModal,
-  handleChange,
-  handleAsk,
-  handleFeedback,
-  saveChat,
-} = useChat();
+    question,
+    message,
+    setMessage,
+    showModal,
+    setShowModal,
+    handleChange,
+    handleAsk,
+    handleFeedback,
+    saveChat,
+    updateChat,
+  } = useChat();
 
-const handleFeedbackSubmit = ({ rating, feedback }) => {
-  const isSaved = saveChat({ rating, feedback });
+  const handleFeedbackSubmit = ({ rating, feedback }) => {
+    updateChat(savedChatId, {
+      rating,
+      feedback,
+    });
 
-  if (!isSaved) return;
+    setShowModal(false);
 
-  setShowModal(false);
+    alert("Chat Saved");
 
-  alert("Chat Saved");
-
-  navigate("/history");
-};
+    navigate("/history");
+  };
 
   return (
     <>
@@ -69,18 +70,28 @@ const handleFeedbackSubmit = ({ rating, feedback }) => {
                 value={question}
                 onChange={handleChange}
                 onAsk={handleAsk}
-                onSave={()=>setShowModal(true)}
+                onSave={() => {
+                  const id = saveChat({
+                    rating: null,
+                    feedback: "",
+                  });
+
+                  if (!id) return;
+
+                  setSavedChatId(id);
+                  setShowModal(true);
+                }}
               />
             </div>
           </div>
         </div>
       </main>
       {showModal && (
-  <FeedbackModal
-    onClose={() => setShowModal(false)}
-    onSubmit={handleFeedbackSubmit}
-  />
-)}
+        <FeedbackModal
+          onClose={() => setShowModal(false)}
+          onSubmit={handleFeedbackSubmit}
+        />
+      )}
     </>
   );
 }

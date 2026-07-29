@@ -18,7 +18,7 @@ export default function Sidebar(){
                 </Link>
             </div>
             <div className={styles.history}>
-                <Link className={styles.historyBtn} to="/history">Past Conversation</Link>
+                <Link className={styles.historyBtn} to="/history">Past Conversations</Link>
             </div>
         </div>
     );
